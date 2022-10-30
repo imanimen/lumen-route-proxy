@@ -7,6 +7,6 @@ abstract class ActionAbstract
 {
 	public function render()
 	{
-		return 'Not Implemented.';
+		return 'You forgot to add method.';
 	}
 }
