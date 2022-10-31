@@ -16,20 +16,36 @@ class BaseController extends Controller
         $class = (new $class_action());
         if ($class->method() !== $request->method())
         {
-            return '405 - invalid method ' .$request->method().'.';
+            return $this->fail([],'invalid method',$code=405);
         }
         $validaton = Validator::make($request->all(), $class->validation());
         if ($validaton->fails())
         {
-            return response()->json([
-                'errors' => $validaton->errors()->first(),
-                'code'   => 422
-            ], 422);
+            return $this->fail($message=$validaton->errors());
         }
         return $class->render();
     }
 
-    public function success(){}
+    public function success($data=[], $code=200)
+    {
+        return $this->render($data, $code);
+    }
 
-    public function fail(){}
+
+    public function fail($message='fail', $errors='error', $code=422)
+    {
+        return $this->render($message, $errors, $code);
+    }
+
+    public function render( $errors='error', $message='fail',int $code = 200)
+    {
+        return response()->make([
+            'data' => null,
+            'errors' => $errors,
+            'messages' => $message,
+            'code' => $code,
+        ])->setStatusCode($code);
+
+    }
+
 }
