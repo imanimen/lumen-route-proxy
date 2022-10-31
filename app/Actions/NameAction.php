@@ -6,12 +6,19 @@ use App\Abstracts\ActionAbstract;
 
 class NameAction extends ActionAbstract
 {
+	protected $must_cache = true;
+
 	public function render()
 	{
-		return 'the requsted name action';
+		return 'Your name is '.$this->getParameter('name').'.';
 	}
 
-	public function getValidation(){}
+	public function validation()
+	{
+		return [
+			'name' => 'required|string'
+		];
+	}
 
 	public function method()
 	{

@@ -21,8 +21,15 @@ class BaseController extends Controller
         $validaton = Validator::make($request->all(), $class->validation());
         if ($validaton->fails())
         {
-            return $validaton->errors();
+            return response()->json([
+                'errors' => $validaton->errors()->first(),
+                'code'   => 422
+            ], 422);
         }
         return $class->render();
     }
+
+    public function success(){}
+
+    public function fail(){}
 }

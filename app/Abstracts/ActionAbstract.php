@@ -4,6 +4,7 @@
 namespace App\Abstracts;
 
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Cache;
 
 abstract class ActionAbstract 
 {
@@ -12,12 +13,35 @@ abstract class ActionAbstract
 	const METHOD_PATCH  = 'PATCH';
 	const METHOD_DELETE = 'DELETE';
 
+	protected $must_cache = false;
+	protected $cache_key  = 'default_key';
+	protected $caceh_ttl  = 10;
+
 	public function run()
 	{
 		return 'Not Added!';
 	}
 
 	public function render()
+	{
+		if (!$this->must_cache)
+		{
+			return $this->runRender();
+		} 
+		else
+		{
+			if (is_null($this->cache_key))
+			{
+				$className = get_class($this);
+				die($className);
+			}
+			return Cache::remember($this->cache_key, $this->caceh_ttl, function () {
+				return $this->runRender();
+			});
+		}
+	}
+
+	public function runRender()
 	{
 		$run = $this->run();
 		return $run;
