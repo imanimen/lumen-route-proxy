@@ -9,12 +9,18 @@ abstract class ActionAbstract
 {
 	const METHOD_GET    = 'GET';
 	const METHOD_POST   = 'POST';
-	const METHOD_PUT    = 'PUT';
+	const METHOD_PATCH  = 'PATCH';
 	const METHOD_DELETE = 'DELETE';
+
+	public function run()
+	{
+		return 'Not Added!';
+	}
 
 	public function render()
 	{
-		return 'You forgot to add method.';
+		$run = $this->run();
+		return $run;
 	}
 
 	public function method()
@@ -26,5 +32,10 @@ abstract class ActionAbstract
 	{
 		$request = Request::capture();
 		return $request->input($name, $default);
+	}
+
+	public function validation()
+	{
+		return [];
 	}
 }

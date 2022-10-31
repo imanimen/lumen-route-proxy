@@ -15,3 +15,5 @@
 
 $router->get('/{action}', 'BaseController@route');
 $router->post('/{action}', 'BaseController@route');
+$router->patch('/{action}', 'BaseController@route');
+$router->delete('/{action}', 'BaseController@route');

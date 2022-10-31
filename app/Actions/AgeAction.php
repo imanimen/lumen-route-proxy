@@ -11,9 +11,15 @@ class AgeAction extends ActionAbstract
 		return 'im ' .$this->getParameter('age'). ' years old.';
 	}
 
-
 	public function method()
 	{
 		return self::METHOD_POST;
+	}
+
+	public function validation()
+	{
+		return [
+			'age' => 'required|integer'
+		];
 	}
 }
