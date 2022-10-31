@@ -7,12 +7,15 @@ use Illuminate\Http\Request;
 class BaseController extends Controller
 {
     public function route(Request $request, $action){
-        // call the action
-        $class_action = base_path() . '../../../Actions/' . ucfirst($action) .'Action.php';
-        if (!$class_action)
+        /*
+        * Check if the action exists
+        */
+        $class_action = 'App\\Actions\\'.ucfirst($action).'Action';
+        if (!class_exists( $class_action ))
         {
-            return null;
+            return 'Class '. ucfirst($action) .' Not Found 404.';
         }
-        return $action;
+       return (new $class_action())->render();
+
     }
 }

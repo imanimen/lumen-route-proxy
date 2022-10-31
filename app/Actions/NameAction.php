@@ -6,7 +6,10 @@ use App\Abstracts\ActionAbstract;
 
 class NameAction extends ActionAbstract
 {
-	public function render(){}
+	public function render()
+	{
+		return 'ok I\'m here';
+	}
 
 	public function getValidation(){}
 
