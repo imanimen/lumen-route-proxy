@@ -13,9 +13,17 @@ class BaseController extends Controller
         $class_action = 'App\\Actions\\'.ucfirst($action).'Action';
         if (!class_exists( $class_action ))
         {
-            return 'Class '. ucfirst($action) .' Not Found 404.';
+            return '404 - action ' .$action. ' not found.';
         }
-       return (new $class_action())->render();
+
+        $class = (new $class_action());
+
+        if ($class->method() !== $request->method())
+        {
+            return '405 - invalid method ' .$request->method().'.';
+        }
+
+        return $class->render();
 
     }
 }

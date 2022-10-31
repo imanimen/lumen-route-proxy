@@ -8,13 +8,13 @@ class NameAction extends ActionAbstract
 {
 	public function render()
 	{
-		return 'ok I\'m here';
+		return 'the requsted name action';
 	}
 
 	public function getValidation(){}
 
 	public function method()
 	{
-		return self::METHOD_POST;
+		return self::METHOD_GET;
 	}
 }

@@ -14,3 +14,4 @@
 */
 
 $router->get('/{action}', 'BaseController@route');
+$router->post('/{action}', 'BaseController@route');

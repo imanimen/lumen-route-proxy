@@ -15,6 +15,6 @@ abstract class ActionAbstract
 
 	public function method()
 	{
-		return self::class;
+		return self::METHOD_GET;
 	}
 }
