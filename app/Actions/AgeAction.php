@@ -8,7 +8,7 @@ class AgeAction extends ActionAbstract
 {
 	public function render()
 	{
-		return 'im 20 years old.';
+		return 'im ' .$this->getParameter('age'). ' years old.';
 	}
 
 
