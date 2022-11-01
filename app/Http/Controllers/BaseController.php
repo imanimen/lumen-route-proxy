@@ -11,7 +11,7 @@ class BaseController extends Controller
         $class_action = 'App\\Actions\\'.ucfirst($action).'Action';
         if (!class_exists( $class_action ))
         {
-            return '404 - action ' .$action. ' not found.';
+            return $this->fail([], 'not found', 404);
         }
         $class = (new $class_action());
         if ($class->method() !== $request->method())
