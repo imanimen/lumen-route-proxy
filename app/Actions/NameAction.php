@@ -14,15 +14,15 @@ class NameAction extends ActionAbstract
 		return 'Your name is '.$this->getParameter('name').'.';
 	}
 
-	public function validation()
-	{
-		return [
-			'name' => 'required|string'
-		];
-	}
-
 	public function method()
 	{
 		return self::METHOD_POST;
+	}
+
+	public function validation()
+	{
+		return [
+			'name' => 'required|integer'
+		];
 	}
 }
