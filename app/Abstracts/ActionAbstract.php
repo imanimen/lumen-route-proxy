@@ -13,7 +13,7 @@ abstract class ActionAbstract
 	const METHOD_PATCH  = 'PATCH';
 	const METHOD_DELETE = 'DELETE';
 
-	protected $must_cache = false;
+	protected $should_cache = false;
 	protected $cache_key  = 'default_key';
 	protected $caceh_ttl  = 10;
 
@@ -24,7 +24,7 @@ abstract class ActionAbstract
 
 	public function render()
 	{
-		if (!$this->must_cache)
+		if (!$this->should_cache)
 		{
 			return $this->runRender();
 		} 
@@ -32,7 +32,7 @@ abstract class ActionAbstract
 		{
 			if (is_null($this->cache_key))
 			{
-				$className = get_class($this);
+				$className = get_class( $this );
 				die($className);
 			}
 			return Cache::remember($this->cache_key, $this->caceh_ttl, function () {

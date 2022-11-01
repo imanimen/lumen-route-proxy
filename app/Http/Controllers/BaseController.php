@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\Validator;
 
 class BaseController extends Controller
 {
-    public function route(Request $request, $action){
+    public function route(Request $request, $action)
+    {
         $class_action = 'App\\Actions\\'.ucfirst($action).'Action';
         if (!class_exists( $class_action ))
         {
@@ -21,31 +22,31 @@ class BaseController extends Controller
         $validaton = Validator::make($request->all(), $class->validation());
         if ($validaton->fails())
         {
-            return $this->fail($message=$validaton->errors());
+            return $this->fail([], $validaton->errors(), $validaton->errors()->first(), 422);
         }
-        return $class->render();
+        return $this->success([$class->render()]);
     }
 
-    public function success($data=[], $code=200)
+
+
+    public function success($data=[], $message=[], $errors=[], $code=200)
     {
-        return $this->render($data, $code);
+        return $this->whiteHouse($data, $message, $errors, $code);
     }
 
-
-    public function fail($message='fail', $errors='error', $code=422)
+    public function fail($data = [], $message=[], $errors=[], $code=422)
     {
-        return $this->render($message, $errors, $code);
+        return $this->whiteHouse($data, $message, $errors, $code);
     }
 
-    public function render( $errors='error', $message='fail',int $code = 200)
+    public function whiteHouse($data=[], $errors=[], $message=[],int $code = 200)
     {
         return response()->make([
-            'data' => null,
+            'data' => $data,
             'errors' => $errors,
             'messages' => $message,
             'code' => $code,
         ])->setStatusCode($code);
-
     }
 
 }

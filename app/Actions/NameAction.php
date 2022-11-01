@@ -7,6 +7,7 @@ use App\Abstracts\ActionAbstract;
 class NameAction extends ActionAbstract
 {
 	protected $must_cache = true;
+	protected $cache_key  = 'name action';
 
 	public function render()
 	{
@@ -22,6 +23,6 @@ class NameAction extends ActionAbstract
 
 	public function method()
 	{
-		return self::METHOD_GET;
+		return self::METHOD_POST;
 	}
 }

@@ -6,11 +6,9 @@ use App\Abstracts\ActionAbstract;
 
 class AgeAction extends ActionAbstract
 {
-	protected $must_cache = true;
-	
 	public function render()
 	{
-		return 'im ' .$this->getParameter('age'). ' years old.';
+		return 'You are ' .$this->getParameter('age'). ' years old.';
 	}
 
 	public function method()
