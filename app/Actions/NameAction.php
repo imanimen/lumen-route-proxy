@@ -22,7 +22,7 @@ class NameAction extends ActionAbstract
 	public function validation()
 	{
 		return [
-			'name' => 'required|integer'
+			'name' => 'required|string'
 		];
 	}
 }
