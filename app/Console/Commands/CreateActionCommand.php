@@ -31,7 +31,7 @@ class CreateActionCommand extends Command
     public function handle()
     {
         try {
-           $action = $this->argument('action');
+           $action = $this->argument('name');
            $dir    = base_path() . '/' . 'app/Actions/' . ucfirst($action) . 'Action.php';
            if (file_exists($dir))
            {
