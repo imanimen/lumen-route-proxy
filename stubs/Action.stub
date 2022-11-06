@@ -1,0 +1,23 @@
+<?php
+
+namespace App\Actions;
+use App\Abstracts\ActionAbstract;
+
+class {{$action_name}} extends ActionAbstract
+{
+
+    public function render()
+    {
+        //
+    }
+
+    public function validation()
+    {
+        //
+    }
+
+    public function method()
+    {
+        // 
+    }
+}
