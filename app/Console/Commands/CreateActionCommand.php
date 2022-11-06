@@ -13,7 +13,7 @@ class CreateActionCommand extends Command
      *
      * @var string
      */
-    protected $signature = "create:action {action}";
+    protected $signature = "make:action {name}";
 
     /**
      * The console command description.
@@ -37,14 +37,17 @@ class CreateActionCommand extends Command
            {
              $this->error('Action Already Exists!');
            }
-           $stubPath  = base_path() . '/' . 'stubs/Action.stub';
-           $stub      = file_get_contents($stubPath);
-           $stub      = str_replace('{{action_name}}', $action, $stub);
+           else {
+            $stubPath  = base_path() . '/' . 'stubs/Action.stub';
+            $stub      = file_get_contents($stubPath);
+            $stub      = str_replace('{{action_name}}', $action, $stub);
 
-           $write     = base_path() . '/' . 'app/Actions/' . ucfirst($action) . 'Action.php';
-           file_put_contents($write, $stub);
+            $write     = base_path() . '/' . 'app/Actions/' . ucfirst($action) . 'Action.php';
+            file_put_contents($write, $stub);
+            $this->info("Action Created. Path: ". $write);
+           }
         } catch (Exception $e) {
-            $this->error("An error occurred");
+            $this->error("An Error Occurred");
         }
     }
 }
