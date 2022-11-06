@@ -32,7 +32,6 @@ class CreateActionCommand extends Command
     {
         try {
            $action = $this->argument('action');
-        //    $class_action = 'App\\Actions\\'.ucfirst($action).'Action';
            $dir    = base_path() . '/' . 'app/Actions/' . ucfirst($action) . 'Action.php';
            if (file_exists($dir))
            {
