@@ -30,22 +30,22 @@ class CreateActionCommand extends Command
      */
     public function handle()
     {
-        // try {
-        //    $action = $this->argument('action');
-        // //    $class_action = 'App\\Actions\\'.ucfirst($action).'Action';
-        //    $dir    = 'App\\Actions\\' . ucfirst($action). '.php';
-        //    if (file_exists($dir))
-        //    {
-        //     $this->error('Action Already Exists!');
-        //    }
-           $stubPath  = '../../../../stubs/Action.stub';
-           if ($stubPath)
+        try {
+           $action = $this->argument('action');
+        //    $class_action = 'App\\Actions\\'.ucfirst($action).'Action';
+           $dir    = base_path() . '/' . 'app/Actions/' . ucfirst($action) . 'Action.php';
+           if (file_exists($dir))
            {
-            $this->info($stubPath);
+             $this->error('Action Already Exists!');
            }
-        //    $stub    = 
-        // } catch (Exception $e) {
-        //     $this->error("An error occurred");
-        // }
+           $stubPath  = base_path() . '/' . 'stubs/Action.stub';
+           $stub      = file_get_contents($stubPath);
+           $stub      = str_replace('{{action_name}}', $action, $stub);
+
+           $write     = base_path() . '/' . 'app/Actions/' . ucfirst($action) . 'Action.php';
+           file_put_contents($write, $stub);
+        } catch (Exception $e) {
+            $this->error("An error occurred");
+        }
     }
 }

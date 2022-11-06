@@ -3,7 +3,7 @@
 namespace App\Actions;
 use App\Abstracts\ActionAbstract;
 
-class {{action_name}}Action extends ActionAbstract
+class loginAction extends ActionAbstract
 {
 
     public function render()
