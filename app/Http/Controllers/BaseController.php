@@ -64,4 +64,9 @@ class BaseController extends Controller
         ])->setStatusCode($code);
     }
 
+    /* TODO: create main handler method and then try/catch the errors to be more accurate
+    *  and beacause we can't use middlewares directly, read from the manners folder. implement it here and in actions. 
+    *  May the force be with you!
+    */
+
 }

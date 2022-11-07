@@ -5,8 +5,9 @@ namespace App\Abstracts;
 
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Cache;
+use App\Intefaces\ActionInteface;
 
-abstract class ActionAbstract 
+abstract class ActionAbstract implements ActionInteface
 {
 	const METHOD_GET    = 'GET';
 	const METHOD_POST   = 'POST';
