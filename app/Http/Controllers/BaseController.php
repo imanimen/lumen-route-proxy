@@ -22,7 +22,7 @@ class BaseController extends Controller
         $validaton = Validator::make($request->all(), $class->validation());
         if ($validaton->fails())
         {
-            return $this->responseFacotry([], $validaton->errors(), $this->validationMessages($validaton->messages()), 422);
+            return $this->responseFacotry([], $validaton->errors(), $this->validationMessages($validaton->errors()), 422);
         }
         return $this->responseFacotry($class->render());
     }
