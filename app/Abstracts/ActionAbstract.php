@@ -33,7 +33,7 @@ abstract class ActionAbstract
 			if (is_null($this->cache_key))
 			{
 				$className = get_class( $this );
-				die($className);
+				$this->setCacheKey = md5($className);
 			}
 			return Cache::remember($this->cache_key, $this->caceh_ttl, function () {
 				return $this->runRender();
@@ -61,5 +61,17 @@ abstract class ActionAbstract
 	public function validation()
 	{
 		return [];
+	}
+
+
+	public function setCacheKey( string $key ): string
+	{
+		return $this->cache_key = $key;
+	}
+
+	public function setCacheTtl( int $ttl ): int
+	{
+		return $this->cache_ttl = $ttl;
+
 	}
 }
