@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class BaseController extends Controller
+class DocsController extends Controller
 {
     /**
      * @OA\Post(
