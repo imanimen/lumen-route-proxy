@@ -1,0 +1,12 @@
+version: '3.5'
+
+services:
+  lumen:
+    ports:
+      - "000:7000"
+    volumes:
+      - .:/home/iman/Desktop/Projects/php/framework
+      - /home/iman/Desktop/Projects/php/framework/vendor
+    build: .
+    command: php -S localhost:7000 -t public
+    restart: always
