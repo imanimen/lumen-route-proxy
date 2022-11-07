@@ -73,6 +73,5 @@ abstract class ActionAbstract implements ActionInteface
 	public function setCacheTtl( int $ttl ): int
 	{
 		return $this->cache_ttl = $ttl;
-
 	}
 }
