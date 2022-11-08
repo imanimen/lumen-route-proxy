@@ -30,12 +30,11 @@ abstract class ActionAbstract implements ActionInterface
 		{
 			return $this->runRender();
 		} 
-		else
-		{
+		else {
 			if (is_null($this->cache_key))
 			{
 				$className = get_class( $this );
-				$this->setCacheKey = md5($className);
+				$className ? $this->setCacheKey(md5($className.'_cache')) : $this->cache_key = 'default_action_cache_'.$this->caceh_ttl;
 			}
 			return Cache::remember($this->cache_key, $this->caceh_ttl, function () {
 				return $this->runRender();

@@ -68,5 +68,4 @@ class BaseController extends Controller
     *  and beacause we can't use middlewares directly, read from the manners folder. implement it here and in actions. 
     *  May the force be with you!
     */
-
 }
