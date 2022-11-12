@@ -64,6 +64,11 @@ abstract class ActionAbstract implements ActionInterface
 		return [];
 	}
 
+	public function getManner()
+	{
+		return [];
+	}
+
 
 	public function setCacheKey( string $key ): string
 	{

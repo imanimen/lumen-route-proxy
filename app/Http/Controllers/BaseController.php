@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class BaseController extends Controller
 {
@@ -23,6 +24,22 @@ class BaseController extends Controller
         if ($validaton->fails())
         {
             return $this->responseFacotry([], $validaton->errors(), $this->validationMessages($validaton->errors()), 422);
+        }
+        $mannerPath = $class->getManner();
+        // dd($mannerPath);
+        if (!class_exists($mannerPath)) 
+        {
+            return $this->responseFacotry([], 'manner not found', [], 500);
+        } 
+        else {
+            $manner = (new $mannerPath());
+            if ($manner->check($request))
+            {
+                return $this->responseFacotry($class->render());
+            }
+            else {
+                return $this->responseFacotry([], 'manner error', [], 422);
+            }
         }
         return $this->responseFacotry($class->render());
     }
@@ -68,4 +85,33 @@ class BaseController extends Controller
     *  and beacause we can't use middlewares directly, read from the manners folder. implement it here and in actions. 
     *  May the force be with you!
     */
+    // private function getManner( Controller $controller , $method )
+    // {
+    //     $matches = $this->getDocAnnotations( $controller , $method );
+    //     if ( !is_null( $matches ) )
+    //     {
+    //         foreach ( $matches as $match )
+    //         {
+    //             if ( Str::startsWith( $match , '@behaviors' ) )
+    //             {
+
+    //                 $behaviors = array_filter( explode( ";" , trim( str_replace( "@behaviors " , "" , $match ) ) ) );
+
+    //                 return array_filter(
+    //                     array_map( function ( $item )
+    //                     {
+    //                         $exploded = explode( '/' , $item );
+    //                         if ( !isset( $exploded[ 1 ] ) )
+    //                         {
+    //                             return "";
+    //                         }
+    //                         return "Modules\\$exploded[0]\\Behaviors\\" . $exploded[ 1 ];
+    //                     } , $behaviors )
+    //                 );
+    //             }
+    //         }
+    //     }
+    //     return [];
+    // }
+
 }

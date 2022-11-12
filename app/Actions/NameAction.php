@@ -3,6 +3,9 @@
 namespace App\Actions;
 
 use App\Abstracts\ActionAbstract;
+use App\Manners\IsAuthManner;
+use App\Manners\JwtRemoteManner;
+use App\Manners\MustEnterNameManner;
 
 class NameAction extends ActionAbstract
 {
@@ -24,5 +27,10 @@ class NameAction extends ActionAbstract
 		return [
 			'name' => 'required|string'
 		];
+	}
+
+	public function getManner()
+	{
+		return JwtRemoteManner::class;	
 	}
 }
