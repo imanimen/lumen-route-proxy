@@ -80,38 +80,4 @@ class BaseController extends Controller
             'code' => $code,
         ])->setStatusCode($code);
     }
-
-    /* TODO: create main handler method and then try/catch the errors to be more accurate
-    *  and beacause we can't use middlewares directly, read from the manners folder. implement it here and in actions. 
-    *  May the force be with you!
-    */
-    // private function getManner( Controller $controller , $method )
-    // {
-    //     $matches = $this->getDocAnnotations( $controller , $method );
-    //     if ( !is_null( $matches ) )
-    //     {
-    //         foreach ( $matches as $match )
-    //         {
-    //             if ( Str::startsWith( $match , '@behaviors' ) )
-    //             {
-
-    //                 $behaviors = array_filter( explode( ";" , trim( str_replace( "@behaviors " , "" , $match ) ) ) );
-
-    //                 return array_filter(
-    //                     array_map( function ( $item )
-    //                     {
-    //                         $exploded = explode( '/' , $item );
-    //                         if ( !isset( $exploded[ 1 ] ) )
-    //                         {
-    //                             return "";
-    //                         }
-    //                         return "Modules\\$exploded[0]\\Behaviors\\" . $exploded[ 1 ];
-    //                     } , $behaviors )
-    //                 );
-    //             }
-    //         }
-    //     }
-    //     return [];
-    // }
-
 }

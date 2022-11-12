@@ -15,7 +15,7 @@ class JwtRemoteManner
         
         if (Cache::get('user_token_'.$token) != null) 
         {
-            $request->request->add( [ 'user' => Cache::get( 'user_token_info_'. $token ) ] ); 
+            $request->request->add(['user' => Cache::get( 'user_token_info_'. $token )]); 
             return true;
         }
         $response = Http::withHeaders(
