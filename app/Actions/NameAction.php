@@ -6,6 +6,7 @@ use App\Abstracts\ActionAbstract;
 use App\Manners\IsAuthManner;
 use App\Manners\JwtRemoteManner;
 use App\Manners\MustEnterNameManner;
+use Illuminate\Support\Facades\Request;
 
 class NameAction extends ActionAbstract
 {
@@ -14,7 +15,7 @@ class NameAction extends ActionAbstract
 
 	public function render()
 	{
-		return 'Your name is '.$this->getParameter('name').'.';
+		return 'Your name is '.$this->getParameter('name').'. and your uuid is: ' . $this->getUserId();
 	}
 
 	public function method()

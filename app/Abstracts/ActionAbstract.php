@@ -6,7 +6,7 @@ namespace App\Abstracts;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Cache;
 use App\Interfaces\ActionInterface;
-
+use Illuminate\Support\Facades\Http;
 
 abstract class ActionAbstract implements ActionInterface
 {
@@ -17,7 +17,7 @@ abstract class ActionAbstract implements ActionInterface
 
 	protected $should_cache = false;
 	protected $cache_key  = 'default_key';
-	protected $caceh_ttl  = 10;
+	protected $caceh_ttl  = 60;
 
 	public function run()
 	{
@@ -79,4 +79,43 @@ abstract class ActionAbstract implements ActionInterface
 	{
 		return $this->cache_ttl = $ttl;
 	}
+
+	public function getUserId()
+    {
+		$request = Request::capture();
+		$url = env('AUTH_URL').'/check';
+        $token = $request->header('Authorization');
+        $response = Http::withHeaders(
+            [
+                'Authorization' => $token
+            ]
+        )->get($url);
+        $code     = $response->status();
+		if ($code == 200) {
+			Cache::set('auth_user_id_info_'. $token, $response);
+			$res = json_decode($response);
+			return $res->data->id ?? null;
+		}
+    }
+
+	public function getUser()
+    {
+		$request = Request::capture();
+		$url = env('AUTH_URL').'/check';
+        $token = $request->header('Authorization');
+        $response = Http::withHeaders(
+            [
+                'Authorization' => $token
+            ]
+        )->get($url);
+        $code     = $response->status();
+		if ($code == 200) {
+			$user =  Cache::remember('user_info_'.$token, 120, function() use ($response) {
+				$res = json_decode($response);
+				return $res->data;
+			});
+			return $user ?? null;
+		}
+    }
+
 }
