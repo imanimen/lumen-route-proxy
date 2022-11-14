@@ -92,9 +92,11 @@ abstract class ActionAbstract implements ActionInterface
         )->get($url);
         $code     = $response->status();
 		if ($code == 200) {
-			Cache::set('auth_user_id_info_'. $token, $response);
-			$res = json_decode($response);
-			return $res->data->id ?? null;
+			$user =  Cache::remember('user_id_info_'.$token, 120, function() use ($response) {
+				$res = json_decode($response);
+				return $res->data;
+			});
+			return $user ?? null;
 		}
     }
 
