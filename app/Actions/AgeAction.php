@@ -3,12 +3,21 @@
 namespace App\Actions;
 
 use App\Abstracts\ActionAbstract;
+use App\Manners\IsAdminManner;
+use App\Manners\JwtRemoteManner;
 
 class AgeAction extends ActionAbstract
 {
 	public function render()
 	{
-		return 'You are ' .$this->getParameter('age'). ' years old.';
+		$age = $this->getUser()->age;
+		// dd($this->getParameter('age'));
+		if ($age < 18){
+			return 'You are ' .$age. ' years old.';
+		}
+		else {
+			return 'You are not allowed to see this page';
+		}
 	}
 
 	public function method()
@@ -21,5 +30,10 @@ class AgeAction extends ActionAbstract
 		return [
 			'age' => 'required|integer'
 		];
+	}
+
+	public function getManner()
+	{
+		return JwtRemoteManner::class;
 	}
 }
