@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Hash;
 
 class RegisterAction extends ActionAbstract
 {
-	protected $must_cache = true;
+	protected $must_cache = false;
 	protected $cache_key  = 'name action';
 
 	public function render()

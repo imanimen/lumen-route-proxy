@@ -13,7 +13,7 @@ class CreateDocsCommand extends Command
      *
      * @var string
      */
-    protected $signature = "gen:doc";
+    protected $signature = "doc:gen";
 
     /**
      * The console command description.
