@@ -29,7 +29,7 @@ class BaseController extends Controller
         // dd($mannerPath);
         if (!class_exists($mannerPath)) 
         {
-            return $this->responseFacotry([], 'manner not found', [], 500);
+            return $this->responseFacotry([], 'manner not found', [], 404);
         } 
         else {
             $manner = (new $mannerPath());
