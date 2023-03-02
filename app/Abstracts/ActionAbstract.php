@@ -14,6 +14,7 @@ abstract class ActionAbstract implements ActionInterface
 	const METHOD_POST   = 'POST';
 	const METHOD_PATCH  = 'PATCH';
 	const METHOD_DELETE = 'DELETE';
+	const METHOD_ANY    = 'ANY';
 
 	protected $should_cache = false;
 	protected $cache_key  = 'default_key';
