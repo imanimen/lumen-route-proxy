@@ -16,8 +16,8 @@ abstract class ActionAbstract implements ActionInterface
 	const METHOD_DELETE = 'DELETE';
 	const METHOD_ANY    = 'ANY';
 
-	protected $should_cache = false;
-	protected $cache_key  = 'default_key';
+	protected $should_cache = true; // TODO: for testing. change it later
+	protected $cache_key  = 'cache_key';
 	protected $caceh_ttl  = 60;
 
 	public function run()
