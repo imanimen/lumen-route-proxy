@@ -15,7 +15,7 @@ class NameAction extends ActionAbstract
 
 	public function render()
 	{
-		return 'Your name is '.$this->getParameter('name').'. and your uuid is: ' . $this->getUserId();
+		return 'Your name is ' . $this->getParameter('name').'. and your uuid is: ' . $this->getUserId();
 	}
 
 	public function method()
